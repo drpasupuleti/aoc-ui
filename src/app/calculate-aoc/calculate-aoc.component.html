@@ -1,0 +1,21 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group row justify-content-center">
+        <label class="col-3 col-form-label">Radius: </label>
+        <div class="col-3">
+            <input type="text" formControlName="radius" class="form-control" [ngClass]="{'is-invalid':submitted && fields.radius.errors,
+            'is-valid':submitted && !fields.radius.errors}" />
+            <div *ngIf="submitted  && fields.radius.errors" class="invalid-feedback">
+                <div *ngIf="fields.radius.errors.required">Radius is required</div>
+                <div *ngIf="fields.radius.errors.max">Radius must be between 1 and 100 </div>
+                <div *ngIf="fields.radius.errors.min">Radius must be between 1 and 100 </div>
+                <div *ngIf="fields.radius.errors.pattern">Radius must be numeric </div>
+            </div>
+            <div *ngIf="submitted && !fields.radius.errors && areaOfCircle" class="valid-feedback">
+                <h6>The area is: {{areaOfCircle}}</h6>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row justify-content-center">
+        <button type="submit" class="btn btn-primary" [disabled]="loading">Calculate</button>
+    </div>
+</form>
